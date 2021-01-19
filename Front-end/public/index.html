@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="css/custompi.css">
+    <title>Cadastro Positivo de Pecuaristas</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+<!-- Materialize JS !-->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+<!-- JAVASCRIPT -->
+	<script>
+	    // INICIALIZAÇÃO 
+		$(document).ready(function(){
+        	// MENU MOBILE
+        	$(".button-collapse").sideNav();
+        	// LINK INTERNO
+        	$(".scrollspy").scrollSpy({
+        		scrollOffset: 0
+        	});
+        	// CAROUSEL
+        	$(".carousel.carousel-slider").carousel({
+        		fullWidth:true
+        	});
+        	// MODAL
+        	$(".modal").modal();
+            // TABS
+            $("ul.tabs").tabs();
+            // ESCONDER MENU AO CLICAR
+            $(".hide-menu").click(function(){
+                $(".button-collapse").sideNav("hide");
+            });
+            // AUTOPLAY
+            function autoplay() {
+                $(".carousel").carousel("next");
+                setTimeout(autoplay, 4500);
+            }
+
+            autoplay();
+
+		});       	
+        // ADICIONANDO NAVCOLOR
+		$(window).on("scroll", function(){
+			if($(window).scrollTop() > 100) {
+				$(".navbar").addClass("navcolor");
+			} else {
+				$(".navbar").removeClass("navcolor");
+			}
+		});
+</script>
+  </body>
+</html>
