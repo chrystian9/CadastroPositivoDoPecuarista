@@ -1,7 +1,5 @@
 package ufla.zetta.gestao.pecuaria.entity.cadastro_positivo_do_pecuarista;
 
-import ufla.zetta.gestao.pecuaria.entity.cadastro_positivo_do_pecuarista.documento.Documento;
-
 import javax.persistence.*;
 import java.util.List;
 

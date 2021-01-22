@@ -25,4 +25,11 @@ public class TesteController {
 
         return "Hello Admin!";
     }
+
+    @GetMapping("/teste")
+    public String teste() {
+
+        return "chegou aqui!";
+    }
+
 }
