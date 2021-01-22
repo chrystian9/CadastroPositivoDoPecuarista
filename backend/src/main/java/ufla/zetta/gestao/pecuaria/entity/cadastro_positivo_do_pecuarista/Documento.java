@@ -1,32 +1,31 @@
 package ufla.zetta.gestao.pecuaria.entity.cadastro_positivo_do_pecuarista;
 
-import ufla.zetta.gestao.pecuaria.entity.cadastro_positivo_do_pecuarista.CadastroPositivo;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(/*schema=*/ name = "documentos")
-public abstract class Documento {
+public class Documento {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    protected Long id;
+    private Long id;
 
-    @NotBlank
+    @NotNull
     @Column(name = "valor")
-    protected Integer valor;
+    private Integer valor;
 
     @NotBlank
-    @Column(name = "status")
-    protected String status;
+    @Column(name = "situacao")
+    private String status;
 
     @NotBlank
     @Column(name = "tipo")
-    protected String tipo;
+    private String tipo;
 //    protected FILE comprovante = null;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "cadastro_positivo_id")
+    @JoinColumn(name = "id_cadastro_positivo")
     private CadastroPositivo cadastroPositivo;
 
     public Documento(){};
@@ -56,7 +55,7 @@ public abstract class Documento {
         return cadastroPositivo;
     }
 
-    protected void calculaValor() {
+    private void calculaValor() {
         switch (tipo) {
             case "descarte_de_residuos_solidos":
                 switch (status) {

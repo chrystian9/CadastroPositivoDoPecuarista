@@ -12,26 +12,27 @@ public class AdminCadastroPositivo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private static final String codigoDeAcesso = "EuTenhoAcesso";
+
     @NotBlank
     @Size(min=11)
     @Digits(integer=11,fraction = 0, message = "CPF - É permitido apenas 11 numeros")
     @Column(name="cpf")
     private String cpf;
 
-    //Login
+    @NotBlank
+    @Size(max=255)
+    @Column(name="senha")
+    private String senha;
 
-    //senha
+    @NotBlank
+    @Size(max=255)
+    @Column(name="login")
+    private String login;
 
     public AdminCadastroPositivo() {}
 
     public AdminCadastroPositivo(String cpf){
-        this.cpf = cpf;
-    }
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setCpf(String cpf) {
         this.cpf = cpf;
     }
 
@@ -41,5 +42,15 @@ public class AdminCadastroPositivo {
 
     public String getCpf() {
         return cpf;
+    }
+
+    public boolean verificaLogin(String login, String senha){
+        if(this.login.equals(login) && this.senha.equals(senha)){
+            return true;
+        }else return false;
+    }
+
+    public static String getCodigoDeAcesso() {
+        return codigoDeAcesso;
     }
 }

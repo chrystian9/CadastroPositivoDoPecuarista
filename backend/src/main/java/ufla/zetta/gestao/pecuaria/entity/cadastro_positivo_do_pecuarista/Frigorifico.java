@@ -13,9 +13,21 @@ public class Frigorifico {
     private Long id;
 
     @NotBlank
-    @Size(min=11)
-    @Digits(integer=11,fraction = 0, message = "CPF - É permitido apenas 11 numeros")
-    @Column(name="cpf")
-    private String cpf;
+    @Size(min=14)
+    @Digits(integer=14,fraction = 0, message = "CPF - É permitido apenas 11 numeros")
+    @Column(name="cnpj")
+    private String cnpj;
+
+    public Frigorifico(String cnpj) {
+        this.cnpj = cnpj;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getCnpj() {
+        return cnpj;
+    }
 
 }

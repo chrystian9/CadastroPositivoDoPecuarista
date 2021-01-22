@@ -4,18 +4,18 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(/*schema*/ name = "cadastro_positivo_pecuarista")
+@Table(/*schema*/ name = "cadastro_positivo")
 public class CadastroPositivo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "id_pecuarista", referencedColumnName = "id")
     private Pecuarista pecuarista;
 
-    @OneToMany(mappedBy = "cadastro_positivo_do_pecuarista",
-            cascade = { CascadeType.ALL })
+    @OneToMany(mappedBy = "cadastroPositivo",
+            cascade = CascadeType.ALL)
     List<Documento> documentos;
 
     @Column(name = "score")
@@ -27,6 +27,10 @@ public class CadastroPositivo {
 
     public CadastroPositivo() {}
 
+    public void atualizaScore(){
+        this.calculaScore();
+    }
+
     private void calculaScore(){
         //media aritmetica da soma dos valores de cada parametro (documento)
         this.score = 0;
@@ -34,10 +38,6 @@ public class CadastroPositivo {
             this.score =+ x.getValor();
         }
         this.score = this.score / documentos.size();
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public void setDocumentos(List<Documento> documentos) {

@@ -3,51 +3,43 @@ package ufla.zetta.gestao.pecuaria.entity.cadastro_positivo_do_pecuarista;
 import javax.persistence.*;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 @Entity
+@Table(/*schema*/ name = "pecuarista")
 public class Pecuarista {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotBlank
-    @Size(min=11)
-    @Digits(integer=11,fraction = 0, message = "CPF - É permitido apenas 11 numeros")
-    @Column(name="cpf")
-    private String cpf;
+    @Size(min=14)
+    @Digits(integer=14,fraction = 0, message = "CNPJ - É permitido apenas 14 numeros")
+    @Column(name="cnpj")
+    private String cnpj;
 
-    //exemplo: MG-3149903-D80BF326C7D4411C8AF0EFDD82E4EA3A
-    @NotBlank
-    @Size(min=43, max=43)
-    @Pattern(regexp = "[A-Z a-z 0-9]*\\s*")
-    @Column(name="car")
-    private String car;
+    @OneToOne(mappedBy = "pecuarista")
+    private CadastroPositivo cadastroPositivo;
 
-    public Pecuarista(String cpf){
-        this.cpf = cpf;
+    public Pecuarista(String cnpj){
+        this.cnpj = cnpj;
     }
 
     public Pecuarista() {}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setCar(String car) {
-        this.car = car;
+    public void setCadastroPositivo(CadastroPositivo cadastroPositivo) {
+        this.cadastroPositivo = cadastroPositivo;
     }
 
     public Long getId() {
         return id;
     }
 
-    public String getCpf() {
-        return cpf;
+    public String getCnpj() {
+        return cnpj;
     }
 
-    public String getCar() {
-        return car;
+    public CadastroPositivo getCadastroPositivo() {
+        return cadastroPositivo;
     }
 }
