@@ -50,7 +50,7 @@ public class AdminCadastroPositivo {
         }else return false;
     }
 
-    public static String getCodigoDeAcesso() {
-        return codigoDeAcesso;
+    public static boolean confereCodigoDeAcesso(String codigoDeAcesso) {
+        return codigoDeAcesso.equals(codigoDeAcesso);
     }
 }

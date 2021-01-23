@@ -1,5 +1,7 @@
 package ufla.zetta.gestao.pecuaria.entity.cadastro_positivo_do_pecuarista;
 
+import com.sun.istack.NotNull;
+
 import javax.persistence.*;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
@@ -18,16 +20,36 @@ public class Frigorifico {
     @Column(name="cnpj")
     private String cnpj;
 
+    @NotNull
+    @Column(name = "status")
+    private boolean status;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_")
+    private FilaDeAprovacaoFrigorifico filaDeAprovacaoFrigorifico;
+
     public Frigorifico(String cnpj) {
         this.cnpj = cnpj;
+        this.status = false;
+    }
+
+    public Frigorifico() {}
+
+    public void setStatus(boolean status) {
+        this.status = status;
     }
 
     public Long getId() {
         return id;
     }
 
+    public boolean getStatus() {
+        return this.status;
+    }
+
     public String getCnpj() {
         return cnpj;
     }
+
 
 }
