@@ -21,9 +21,9 @@ public class ControllerPecuarista {
     @Autowired
     ServicePecuaristaImpl servicePecuarista;
 
-    @DeleteMapping("/deletaCadastroPecuarista/{cnpj}")
+    @DeleteMapping("/deletaPecuarista/{cnpj}")
     public ResponseEntity<String> deleteCadastroPositivo(@PathVariable String cnpj) {
 
-        return servicePecuarista.deletaPecuarista(cnpj);
+        return ResponseEntity.ok().body(servicePecuarista.deletaPecuarista(cnpj));
     }
 }

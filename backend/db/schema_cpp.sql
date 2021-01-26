@@ -1,8 +1,17 @@
 CREATE SCHEMA cadastro_positivo_do_pecuarista;
 
+CREATE TABLE admins_cadastro_positivo(
+    id SERIAL PRIMARY KEY,
+    cpf VARCHAR (255) NOT NULL,
+    senha VARCHAR (255) NOT NULL,
+    login VARCHAR (255) NOT NULL
+);
+
 CREATE TABLE pecuarista(
     id SERIAL PRIMARY KEY,
-    cnpj VARCHAR(255)
+    cnpj VARCHAR(255),
+    nome VARCHAR (255),
+    car VARCHAR (255)
 );
 
 CREATE TABLE frigorifico(

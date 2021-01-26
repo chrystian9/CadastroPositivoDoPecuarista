@@ -1,11 +1,13 @@
 package ufla.zetta.gestao.pecuaria.entity.cadastro_positivo_do_pecuarista;
 
+import ufla.zetta.gestao.pecuaria.utils.cadastro_positivo_do_pecuarista.Config;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(/*schema=*/ name = "documentos")
+@Table(schema = Config.SCHEMA, name = "documentos")
 public class Documento {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -60,11 +62,11 @@ public class Documento {
             case "descarte_de_residuos_solidos":
                 switch (status) {
                     case "Faz":
-                        //                if(comprovante){
-                        //                    this.valor = 100;
-                        //                else{
-                        //                    this.valor = 0;
-                        //                }
+//                        if(comprovante) {
+//                            this.valor = 100;
+//                        }else{
+//                            this.valor = 0;
+//                        }
                         this.valor = 100;
                         break;
                     case "Não faz":
@@ -99,11 +101,11 @@ public class Documento {
             case "outorga_da_agua":
                 switch (status) {
                     case "Possui":
-                        //                if(comprovante){
-                        //                    this.valor = 100;
-                        //                else{
-                        //                    this.valor = 0;
-                        //                }
+//                        if(comprovante) {
+//                            this.valor = 100;
+//                        }else{
+//                            this.valor = 0;
+//                        }
                         this.valor = 100;
                         break;
                     case "Não precisa":

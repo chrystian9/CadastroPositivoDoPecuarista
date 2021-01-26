@@ -4,24 +4,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import ufla.zetta.gestao.pecuaria.dto.CadastroPecuaristaDto;
 import ufla.zetta.gestao.pecuaria.entity.cadastro_positivo_do_pecuarista.CadastroPositivo;
-import ufla.zetta.gestao.pecuaria.entity.cadastro_positivo_do_pecuarista.Documento;
-import ufla.zetta.gestao.pecuaria.entity.cadastro_positivo_do_pecuarista.Pecuarista;
 import ufla.zetta.gestao.pecuaria.repository.cadastro_positivo_do_pecuarista.RepositoryCadastroPositivo;
-import ufla.zetta.gestao.pecuaria.repository.cadastro_positivo_do_pecuarista.RepositoryPecuarista;
-import ufla.zetta.gestao.pecuaria.services.cadastro_positivo_do_pecuarista.ServiceCadastroPositivo;
 import ufla.zetta.gestao.pecuaria.services.cadastro_positivo_do_pecuarista.impl.ServiceCadastroPositivoImpl;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 public class ControllerCadastroPositivo {
-//    @Autowired
-//    RepositoryCadastroPositivo repositoryCadastroPositivo;
-//
+    @Autowired
+    RepositoryCadastroPositivo repositoryCadastroPositivo;
+
 //    @Autowired
 //    RepositoryPecuarista repositoryPecuarista;
 
@@ -30,33 +25,33 @@ public class ControllerCadastroPositivo {
 
     @PostMapping("/insereCadastroPositivo")
     public ResponseEntity<CadastroPositivo> insereCadastroPositivo(
-            /*@Valid @RequestBody CadastroPositivo cadastroPositivo*/){
+            @Valid @RequestBody CadastroPecuaristaDto cadastroPecuaristaDto){
 
-        return serviceCadastroPositivo.insereCadastroPositivo();
+        return ResponseEntity.ok().body(serviceCadastroPositivo.insereCadastroPositivo(cadastroPecuaristaDto));
     }
 
     @GetMapping("/listarCadastrosPositivos")
     public ResponseEntity<List<CadastroPositivo>> listarCadastrosPositivos(){
 
-        return serviceCadastroPositivo.listarCadastrosPositivos();
+        return ResponseEntity.ok().body(serviceCadastroPositivo.listarCadastrosPositivos());
     }
 
     @GetMapping("/buscaCadastroPositivo/{cnpj}")
     public ResponseEntity<CadastroPositivo> buscaCadastroPositivo(@PathVariable String cnpj){
 
-        return serviceCadastroPositivo.buscaCadastroPositivo(cnpj);
+        return ResponseEntity.ok().body(serviceCadastroPositivo.buscaCadastroPositivo(cnpj));
     }
 
     @PutMapping(value = "/editarCadastroPositivo/{cnpj}")
     public ResponseEntity<String> editarCadastroPositivo(
             /*@Valid @RequestBody CadastroPositivo cadastroPositivo*/@PathVariable String cnpj){
 
-        return serviceCadastroPositivo.editarCadastroPositivo(cnpj);
+        return ResponseEntity.ok().body(serviceCadastroPositivo.editarCadastroPositivo(cnpj));
     }
 
     @DeleteMapping("/deletaCadastroPecuarista/{cnpj}")
     public ResponseEntity<String> deleteCadastroPositivo(@PathVariable String cnpj) {
 
-        return serviceCadastroPositivo.deletaCadastroPositivo(cnpj);
+        return ResponseEntity.ok().body(serviceCadastroPositivo.deletaCadastroPositivo(cnpj));
     }
 }

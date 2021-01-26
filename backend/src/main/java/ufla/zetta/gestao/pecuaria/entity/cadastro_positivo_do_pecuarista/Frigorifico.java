@@ -1,6 +1,7 @@
 package ufla.zetta.gestao.pecuaria.entity.cadastro_positivo_do_pecuarista;
 
 import com.sun.istack.NotNull;
+import ufla.zetta.gestao.pecuaria.utils.cadastro_positivo_do_pecuarista.Config;
 
 import javax.persistence.*;
 import javax.validation.constraints.Digits;
@@ -8,7 +9,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 @Entity
-@Table(/*schema*/name = "frigorifico")
+@Table(schema = Config.SCHEMA, name = "frigorifico")
 public class Frigorifico {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,10 +24,6 @@ public class Frigorifico {
     @NotNull
     @Column(name = "status")
     private boolean status;
-
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_")
-    private FilaDeAprovacaoFrigorifico filaDeAprovacaoFrigorifico;
 
     public Frigorifico(String cnpj) {
         this.cnpj = cnpj;
@@ -50,6 +47,4 @@ public class Frigorifico {
     public String getCnpj() {
         return cnpj;
     }
-
-
 }

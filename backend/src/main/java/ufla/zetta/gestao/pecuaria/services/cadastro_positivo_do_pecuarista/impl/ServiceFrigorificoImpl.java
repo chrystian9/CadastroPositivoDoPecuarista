@@ -1,7 +1,7 @@
 package ufla.zetta.gestao.pecuaria.services.cadastro_positivo_do_pecuarista.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 import ufla.zetta.gestao.pecuaria.entity.cadastro_positivo_do_pecuarista.Frigorifico;
 import ufla.zetta.gestao.pecuaria.repository.cadastro_positivo_do_pecuarista.RepositoryFrigorifico;
 import ufla.zetta.gestao.pecuaria.services.cadastro_positivo_do_pecuarista.ServiceFrigorifico;
@@ -9,6 +9,7 @@ import ufla.zetta.gestao.pecuaria.services.cadastro_positivo_do_pecuarista.Servi
 import java.util.ArrayList;
 import java.util.List;
 
+@Service
 public class ServiceFrigorificoImpl implements ServiceFrigorifico {
     @Autowired
     RepositoryFrigorifico repositoryFrigorifico;
@@ -16,19 +17,19 @@ public class ServiceFrigorificoImpl implements ServiceFrigorifico {
     @Autowired
     ServiceAdminCadastroPositivoImpl serviceAdminCadastroPositivo;
     @Override
-    public ResponseEntity<Frigorifico> insereFrigorigico(String cnpj) {
+    public Frigorifico insereFrigorigico(String cnpj) {
         Frigorifico frigorifico = new Frigorifico(cnpj);
         repositoryFrigorifico.save(frigorifico);
 
-        return ResponseEntity.ok().body(frigorifico);
+        return frigorifico;
     }
 
-    public ResponseEntity<List<Frigorifico>> listaFrigorificos(){
+    public List<Frigorifico> listaFrigorificos(){
         List<Frigorifico> frigorificos = repositoryFrigorifico.findAll();
         if(frigorificos.isEmpty()){
-            return ResponseEntity.notFound().build();
+            return null;
         }
-        return ResponseEntity.ok().body(frigorificos);
+        return frigorificos;
     }
 
     public List<Frigorifico> listaFrigorificosNaoAprovados(){
@@ -43,9 +44,9 @@ public class ServiceFrigorificoImpl implements ServiceFrigorifico {
         return frigorificosNaoAprovados;
     }
 
-    public ResponseEntity<String> editaFrigorifico(Frigorifico x) {
+    public String editaFrigorifico(Frigorifico x) {
         repositoryFrigorifico.save(x);
 
-        return ResponseEntity.ok("Atualizado com sucesso");
+        return "Atualizado com sucesso";
     }
 }

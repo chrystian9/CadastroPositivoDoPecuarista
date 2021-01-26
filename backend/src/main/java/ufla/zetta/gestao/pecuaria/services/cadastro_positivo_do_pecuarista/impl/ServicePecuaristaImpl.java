@@ -1,13 +1,14 @@
 package ufla.zetta.gestao.pecuaria.services.cadastro_positivo_do_pecuarista.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 import ufla.zetta.gestao.pecuaria.entity.cadastro_positivo_do_pecuarista.Pecuarista;
 import ufla.zetta.gestao.pecuaria.repository.cadastro_positivo_do_pecuarista.RepositoryPecuarista;
 import ufla.zetta.gestao.pecuaria.services.cadastro_positivo_do_pecuarista.ServicePecuarista;
 
 import java.util.List;
 
+@Service
 public class ServicePecuaristaImpl implements ServicePecuarista {
     @Autowired
     RepositoryPecuarista repositoryPecuarista;
@@ -15,23 +16,23 @@ public class ServicePecuaristaImpl implements ServicePecuarista {
     @Override
     public Pecuarista buscaPecuarista(String cnpj) {
         List<Pecuarista> pecuaristas = repositoryPecuarista.findAll();
-        for (Pecuarista x : pecuaristas) {
-            if (x.getCnpj().equals(cnpj)) {
-                return x;
+        for (Pecuarista pecuarista : pecuaristas) {
+            if (pecuarista.getCnpj().equals(cnpj)) {
+                return pecuarista;
             }
         }
         return null;
     }
 
     @Override
-    public ResponseEntity<String> deletaPecuarista(String cnpj) {
+    public String deletaPecuarista(String cnpj) {
         List<Pecuarista> pecuaristas = repositoryPecuarista.findAll();
         for (Pecuarista x : pecuaristas) {
             if (x.getCnpj().equals(cnpj)) {
                 repositoryPecuarista.delete(x);
-                return ResponseEntity.ok(x.getCnpj() + " deletado");
+                return x.getCnpj() + " deletado";
             }
         }
-        return ResponseEntity.notFound().build();
+        return null;
     }
 }

@@ -1,12 +1,14 @@
 package ufla.zetta.gestao.pecuaria.entity.cadastro_positivo_do_pecuarista;
 
+import ufla.zetta.gestao.pecuaria.utils.cadastro_positivo_do_pecuarista.Config;
+
 import javax.persistence.*;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 @Entity
-@Table(/*schema*/ name = "admins_cadastro_positivo")
+@Table(schema = Config.SCHEMA, name = "admins_cadastro_positivo")
 public class AdminCadastroPositivo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,7 +23,7 @@ public class AdminCadastroPositivo {
     private String cpf;
 
     @NotBlank
-    @Size(max=255)
+    @Size(max = 255)
     @Column(name="senha")
     private String senha;
 
@@ -32,8 +34,11 @@ public class AdminCadastroPositivo {
 
     public AdminCadastroPositivo() {}
 
-    public AdminCadastroPositivo(String cpf){
+    public AdminCadastroPositivo(
+            String cpf, String senha, String login){
         this.cpf = cpf;
+        this.login = login;
+        this.senha = senha;
     }
 
     public Long getId() {
@@ -52,5 +57,29 @@ public class AdminCadastroPositivo {
 
     public static boolean confereCodigoDeAcesso(String codigoDeAcesso) {
         return codigoDeAcesso.equals(codigoDeAcesso);
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public String getSenha() {
+        return senha;
     }
 }

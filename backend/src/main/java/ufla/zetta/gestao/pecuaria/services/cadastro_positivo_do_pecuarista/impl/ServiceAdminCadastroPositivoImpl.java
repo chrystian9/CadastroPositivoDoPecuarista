@@ -1,8 +1,6 @@
 package ufla.zetta.gestao.pecuaria.services.cadastro_positivo_do_pecuarista.impl;
 
-import com.sun.org.apache.regexp.internal.RE;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import ufla.zetta.gestao.pecuaria.entity.cadastro_positivo_do_pecuarista.AdminCadastroPositivo;
 import ufla.zetta.gestao.pecuaria.entity.cadastro_positivo_do_pecuarista.Frigorifico;
@@ -21,54 +19,55 @@ public class ServiceAdminCadastroPositivoImpl implements ServiceAdminCadastroPos
     ServiceFrigorificoImpl serviceFrigorifico;
 
     @Override
-    public ResponseEntity<AdminCadastroPositivo> cadastrarAdmin(String cpf, String codigoDeAcesso) {
+    public AdminCadastroPositivo cadastrarAdmin(String cpf, String codigoDeAcesso) {
         if(AdminCadastroPositivo.confereCodigoDeAcesso(codigoDeAcesso)){
-            AdminCadastroPositivo adminCadastroPositivo = new AdminCadastroPositivo(cpf);
+            AdminCadastroPositivo adminCadastroPositivo =
+                    new AdminCadastroPositivo(cpf, "testeSenha", "testeLogin");
 
             repositoryAdminCadastroPositivo.save(adminCadastroPositivo);
 
-            return ResponseEntity.ok().body(adminCadastroPositivo);
+            return adminCadastroPositivo;
         }
-        return ResponseEntity.notFound().build();
+        return null;
     }
 
     @Override
-    public ResponseEntity<AdminCadastroPositivo> buscaAdmin(String cpf) {
+    public AdminCadastroPositivo buscaAdmin(String cpf) {
         List<AdminCadastroPositivo> listaDeAdmins = repositoryAdminCadastroPositivo.findAll();
-        for (AdminCadastroPositivo x : listaDeAdmins) {
-            if (x.getCpf().equals(cpf)) {
-                return ResponseEntity.ok().body(x);
+        for (AdminCadastroPositivo adminCadastroPositivo : listaDeAdmins) {
+            if (adminCadastroPositivo.getCpf().equals(cpf)) {
+                return adminCadastroPositivo;
             }
         }
-        return ResponseEntity.notFound().build();
+        return null;
     }
 
     @Override
-    public ResponseEntity<String> deletaAdmin(String cpf) {
+    public String deletaAdmin(String cpf) {
         List<AdminCadastroPositivo> listaDeAdmins = repositoryAdminCadastroPositivo.findAll();
         for (AdminCadastroPositivo x : listaDeAdmins) {
             if (x.getCpf().equals(cpf)) {
                 repositoryAdminCadastroPositivo.delete(x);
-                return ResponseEntity.ok(x.getCpf() + " deletado");
+                return x.getCpf() + " deletado";
             }
         }
-        return ResponseEntity.notFound().build();
+        return null;
     }
 
     @Override
-    public  aprovaFrigorifico(String cnpj) {
+    public Frigorifico aprovaFrigorifico(String cnpj) {
         List<Frigorifico> frigorificos = serviceFrigorifico.listaFrigorificosNaoAprovados();
 
         if(frigorificos.isEmpty()){
-            return ResponseEntity.notFound().build();
+            return null;
         }
-        for (Frigorifico x : frigorificos) {
-            if(x.getCnpj().equals(cnpj)){
-                x.setStatus(true);
-                serviceFrigorifico.editaFrigorifico(x);
-                return ResponseEntity.ok().body(x);
+        for (Frigorifico frigorifico : frigorificos) {
+            if(frigorifico.getCnpj().equals(cnpj)){
+                frigorifico.setStatus(true);
+                serviceFrigorifico.editaFrigorifico(frigorifico);
+                return frigorifico;
             }
         }
-        return ResponseEntity.notFound().build();
+        return null;
     }
 }

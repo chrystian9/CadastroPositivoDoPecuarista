@@ -27,6 +27,6 @@ public class ControllerFrigorifico {
     public ResponseEntity<Frigorifico> insereFrigorifico(@PathVariable String cnpj
             /*@Valid @RequestBody Frigorifico frigorifico*/){
 
-        return serviceFrigorifico.insereFrigorigico(cnpj);
+        return ResponseEntity.ok().body(serviceFrigorifico.insereFrigorigico(cnpj));
     }
 }
