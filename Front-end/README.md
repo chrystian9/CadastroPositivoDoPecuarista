@@ -1,4 +1,4 @@
-# cadastropositivo
+# cadastro-positivo
 
 ## Project setup
 ```

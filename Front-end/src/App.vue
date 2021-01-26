@@ -1,19 +1,14 @@
 <template>
-  <Pecuarista/>
+  <div id="app">
+    <navbar/>
+    <router-view/>
+  </div>
 </template>
-
 <script>
-import Pecuarista from './components/Pecuarista'
 
-
-export default{
-  name: 'app',
-  components: {
-    Pecuarista
-  }
+export default {
 }
 </script>
 
 <style>
-
 </style>
