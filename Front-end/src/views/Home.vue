@@ -34,14 +34,15 @@
       <div class="row container banner">
         <div class="col s12 center">
           <h2 class="white-text">Cadastro Positivo de Pecuaristas</h2>
-          <p class="white-text light">Sustentabilidade ambiental garantida!</p>
+          <p class="white-text light">A carne brasileira com garantia de sustentabilidade ambiental !</p>
           <div class="row">
-            <a
+            <button
               href="#horarios-modal"
               class="btn btn-large blue-logo modal-trigger"
+              @click.prevent="getAPI()"
             >
               Pecuarista
-            </a>
+            </button>
             &nbsp;&nbsp;&nbsp;&nbsp;
             <a
               href="#login-modal"
@@ -62,14 +63,12 @@
           </ul>
           <div class="col s12 m6 l4" id="form-login-frigorifico">
             <div class="formulario white black-text">
-              <form action="" method="post">
+              <form @submit.prevent="submitFrigorifico()">
                 <div class="input-field">
-                  <input type="text" name="cnpj" id="cnpj" />
-                  <label for="cnpj">Seu CNPJ</label>
+                  <input type="text" name="cnpjf" id="cnpjf" v-model="frigorifico.cnpjf" />
+                  <label for="cnpjf">Seu CNPJ</label>
                 </div>
-                <a class="btn brown" type="submit" href="frigorifico">
-                  Entrar
-                </a>
+                <button class="btn brown" type="submit" >Entrar</button>
                 &nbsp;&nbsp;&nbsp;&nbsp;
                 <a class="btn brown modal-action modal-close"> Voltar </a>
               </form>
@@ -91,51 +90,42 @@
           </ul>
           <div class="col s12 m6 l4" id="form-pecuarista">
             <div class="formulario white black-text">
-              <form action="#.php" method="post">
+              <form>
                 <div class="input-field">
-                  <input type="text" name="car" id="car" />
-                  <label for="subject">Cadastro Ambiental Rural (CAR)</label>
+                  <input type="text" name="nome" id="nome" v-model="form.nome" />
+                  <label for="nome">Nome</label>
                 </div>
                 <div class="input-field">
-                  <select name="estadocar">
-                    <option>Estado do CAR</option>
-                    <option>Ativo</option>
-                    <option>Pendente</option>
-                    <option>Suspenso</option>
-                    <option>Cancelado</option>
-                    <option>Não possui</option>
-                  </select>
+                  <input type="text" name="cnpj" id="cnpj" v-model="form.cnpj" />
+                  <label for="cnpj(Somente números">CNPJ (Somente números)</label>
                 </div>
                 <div class="input-field">
-                  <select name="regularidade">
-                    <option>Certificado de Regularidade</option>
-                    <option>Ativo</option>
-                    <option>Vencido</option>
-                    <option>Não possui</option>
-                  </select>
+                  <input type="password" name="senha" id="senha" v-model="form.senha" />
+                  <label for="senha">Digite sua senha</label>
                 </div>
                 <div class="input-field">
-                  <select name="outorga">
-                    <option>Outorga da água</option>
-                    <option>Possui</option>
-                    <option>Não Possui</option>
-                  </select>
+                  <input type="text" name="car" id="car" v-model="form.car" />
+                  <label for="car">Cadastro Ambiental Rural (CAR)</label>
                 </div>
                 <div class="input-field">
-                  <select name="licenciamento">
-                    <option>Lincenciamento Ambiental</option>
-                    <option>Deferido</option>
-                    <option>Indeferido</option>
-                    <option>Arquivado</option>
-                    <option>Cancelado</option>
-                  </select>
+                  <input type="text" name="estadocar" id="estadocar" v-model="form.estadocar" />
+                  <label for="estadocar">Estado do CAR ( Ex: Ativo, Pendente, Suspenso, Cancelado, Não Possui )</label>
                 </div>
                 <div class="input-field">
-                  <select name="comprovante">
-                    <option>Comprovante de descarte de embalagens</option>
-                    <option>Faz</option>
-                    <option>Não Faz</option>
-                  </select>
+                  <input type="text" name="regularidade" v-model="form.regularidade"/>
+                  <label for="regularidade">Certificado de Regularidade ( Ex: Ativo, Vencido, Não possui )</label>
+                </div>
+                <div class="input-field">
+                  <input type="text" name="outorga" v-model="form.outorga"/>
+                  <label for="regularidade">Outorga da Água ( Ex: Possui, Não Possui )</label>
+                </div>
+                <div class="input-field">
+                  <input type="text" name="licenciamento" v-model="form.licenciamento"/>
+                  <label for="regularidade">Licenciamento Ambiental ( Ex: Deferido, Indeferido, Arquivado, Cancelado, Não Possui )</label>
+                </div>
+                <div class="input-field">
+                  <input type="text" name="comprovante" v-model="form.comprovante"/>
+                  <label for="regularidade"> Comprovante de descarte de Resíduos Sólidos ( Ex: Faz, Não Faz )</label>
                 </div>
                 <p>
                   <input
@@ -149,7 +139,7 @@
                     verdadeiras</label
                   >
                 </p>
-                <button class="btn blue-logo" type="submit">Cadastrar</button>
+                <button class="btn blue-logo" type="submit" @click.prevent="postAPI()">Cadastrar</button>
                 &nbsp;&nbsp;&nbsp;&nbsp;
                 <a class="btn blue-logo modal-action modal-close"> Voltar </a>
               </form>
@@ -157,16 +147,16 @@
           </div>
           <div class="col s12 m6 l4" id="login-pecuarista">
             <div class="formulario white black-text">
-              <form action="#.php" method="post">
+              <form>
                 <div class="input-field">
-                  <input type="text" name="email" id="email" />
-                  <label for="email">Seu email</label>
+                  <input required type="text" v-model="cnpj"/>
+                  <label for="cnpj">Seu CNPJ</label>
                 </div>
                 <div class="input-field">
-                  <input type="text" name="senha" id="senha" />
-                  <label for="email">Sua senha</label>
+                  <input required type="password"  v-model="senha"/>
+                  <label for="senha">Sua senha</label>
                 </div>
-                <a class="btn blue-logo" href="/pecuarista">Entrar</a>
+                <button class="btn blue-logo" @click.prevent="login()">Entrar</button>
                 &nbsp;&nbsp;&nbsp;&nbsp;
                 <a class="btn blue-logo modal-action modal-close"> Voltar </a>
               </form>
@@ -371,7 +361,7 @@
         <article class="col s12 m6 l3">
           <div class="card">
             <div class="card-image">
-              <img src="img/dados.jpg" alt="Funcional" class="materialboxed" />
+              <img src="img/dados.png" alt="Funcional" class="materialboxed" />
               <a class="btn btn-floating halfway-fab blue-logo">
                 <i class="material-icons">info</i>
               </a>
@@ -440,7 +430,7 @@
               Dúvidas, criticas ou sujestões? Entre em contato conosco, seu
               feedback é muito importante.
             </p>
-            <form action="enviar-email.php" method="post">
+            <form>
               <div class="input-field">
                 <input type="text" name="name" id="name" />
                 <label for="name">Seu nome</label>
@@ -533,7 +523,7 @@
     </div>
     <footer class="rodape white" style="background-color=white">
       <div class="row container center">
-        <img src="img/greenlogo.png" class="logo_img" />
+        <img src="img/logo.png" class="logo_img" />
         <p class="light green-text">
           © Cadastro Positivo de Pecuaristas - Zetta Lab
         </p>
@@ -543,16 +533,63 @@
 </template>
 
 <script>
+import axios from "axios"
+export default {
+  data() {
+    return {
+      responseGetAPI: "",
+      responsePostAPI: "",
+      cnpj:"",
+      senha:"",
+      form: {
+        nome: "",
+        cnpj: "",
+        senha: "",
+        car: "",
+        estadocar: "",
+        regularidade: "",
+        outorga: "",
+        licenciamento: "",
+        comprovante: "",
+      },
+      frigorifico: {
+        cnpjf: "",
+      }
+    };
+  },
+  methods: {
+    getAPI: async function (){
+        console.log("getAPI")
+        await axios.get('https://cpp-api.herokuapp.com/').then(res => {
+        console.log(res)
+        console.log(res.data)
+        this.responseGetAPI = res.data.message
+        console.log(res.data.message)
+        });
+        },
+        postAPI: async function (){
+        console.log("postAPI");
+        const res = await axios.post('https://cpp-api.herokuapp.com/insereCadastroPositivo', 
+        {nome: this.form.nome, cnpj: this.form.cnpj, senha: this.form.senha, car:this.form.car, 
+        estadocar: this.form.estadocar, regularidade: this.form.regularidade, outorga: this.form.outorga, licenciamento: 
+        this.form.licenciamento, comprovante: this.form.comprovante})
+            console.log(res)
+            console.log(res.data)
+            alert("Cadastro Efetuado com Sucesso");
+        },
+    submitFrigorifico() {
+      console.log(this.frigorifico);
+    },
+    login: async function (){
+    console.log("postAPI");
+    const res = await axios.post('https://cpp-api.herokuapp.com/loginPecuarista', 
+    {cnpj: this.cnpj, senha: this.senha})
+    console.log(res)
+    console.log(res.data)
+    this.$router.push('/pecuarista')
+    },
+  },
+};
 </script>
 <style>
 </style>
-
-// @ is an alias to /src
-//import HelloWorld from '@/components/HelloWorld.vue'
-
-//export default {
-  //name: 'Home',
-  //components: {
-   // HelloWorld
- // }
-//}

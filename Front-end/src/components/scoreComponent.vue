@@ -23,12 +23,9 @@
                 >
               </li>
             </ul>
-            <a
-              href="#menu-mobile"
-              data-activates="menu-mobile"
-              class="button-collapse right"
-              ><i class="material-icons">menu</i></a
-            >
+            <a href="#menu-mobile" data-activates="menu-mobile" class="button-collapse right">
+            <i class="material-icons greenIcon">menu</i>
+            </a>
           </div>
         </nav>
       </div>
@@ -38,17 +35,23 @@
         <div class="col s12 center">
           <h2 class="light">Score do Pecuarista</h2>
           <p class="light">
-            Aqui você poderá verificar o Score do pecuarista de acordo com os
-            documentos que ele possui.
+            Aqui você poderá verificar o seu Score de acordo com o status
+             dos documentos que você cadastrou em nossa plataforma.
           </p>
-          <h4 style="color: #673a01">Score Final: 700</h4>
+          <h4 style="color: #673a01">Score Final: {{score}}</h4>
+          <p class="bold">
+            Clique 
+            nos botões abaixo para identificar os documentos que levaram a essa pontuação:
+          </p>
           <chartjs-doughnut v-bind:labels="labels"
           v-bind:datasets="datasets"
           v-bind:option="option" class="grafico"></chartjs-doughnut>
         </div>
       </div>
-      <div class="row container">
-        <article class="col s12"></article>
+      <div class="row center btn-horario">
+        <a href="#login-modal" class="btn btn-large blue-logo modal-trigger"
+          ><i class="material-icons left"></i> Solicitar auxílio para melhorar o seu score
+        </a>
       </div>
       <footer class="rodape">
         <div style="margin-left: 60px" class="row container center">
@@ -60,17 +63,23 @@
       </footer>
     </section>
   </div>
-</template>
 
+</template>
 <script>
-export default{
-    data(){
-        return{
-            labels: ["Car","Certificado do Ibama", "Outorga da água","Certificado de Regularidade", "Comprovante de Descarte de Embalgens"],
+import axios from "axios";
+export default {
+  mounted() {
+    this.api();
+  },
+  data() {
+    return {
+      dados: [],
+      score: 0,
+      labels: ["Car","Descarte de Resíduos Sólidos", "Licenciamento Ambiental","Outorga da água", "Certificado de Regularidade do Ibama"],
             datasets: [
                 {
-                    data:[400, 300, 0, 0, 0],
-                    backgroundColor: ["Green", "Yellow", "Red", "Blue", "Orange"]
+                    data:[],
+                    backgroundColor: ["Green", "Red", "Yellow", "Blue", "Orange"]
                 }
             ],
             option: {
@@ -79,13 +88,28 @@ export default{
                     position: "bottom",
                     text: "Score do Pecuarista"
                 }
-
             }
-        };
-    }
+    };
+  },
+  methods: {
+    async api() {
+      // DUMMY DATA do api
+      await axios
+        .post("https://cpp-api.herokuapp.com/buscaCadastroPositivo", { id: 11})
+        .then((res) => {
+          this.score = res.data.score;
+          for (let j = 0; j < 5; j++) {
+            const x = res.data.documentoDtos[j].valor;
+            console.log(res.data.documentoDtos[j].valor);
+
+            this.datasets[0].data.push(x);
+          }
+          this.dados.push(res.data);
+        });
+    },
+  },
 };
 </script>
-
 <style scoped>
 .grafico{
     margin-left: 10%;
@@ -93,5 +117,4 @@ export default{
     height: 80%;
     width: 80%;
 }
-
 </style>

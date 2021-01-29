@@ -27,8 +27,13 @@ const routes = [
   },
   {
     path: '/score',
-    name: 'Pecuarista',
+    name: ' ScoreComponent',
     component: () => import('../components/scoreComponent.vue')
+  },
+  {
+    path: '/api',
+    name: 'API',
+    component: () => import('../components/API.vue')
   }
 ]
 const router = new VueRouter({

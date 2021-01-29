@@ -58,7 +58,7 @@
 <article class="col s12 m6 l6">
  <div class="card">
   <div class="card-image">
-   <img src="img/lista.png" alt="Nutrição" class="materialboxed">
+   <img src="img/dados.png" alt="Nutrição" class="materialboxed">
    <a href="#nutricao-modal" class="btn btn-floating halfway-fab blue-logo modal-trigger">
     <i class="material-icons">info</i>
   </a>            

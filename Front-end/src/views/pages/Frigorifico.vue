@@ -16,7 +16,7 @@
                         <li><a style="color:#673a01" href="#sobre">Ver Perfil</a></li>
                         <li><a style="color:#673a01" href="C:\Users\danie\Desktop\Cadastro_Positivo\index.html">Sair</a></li>
                     </ul>
-                    <a href="#menu-mobile" data-activates="menu-mobile" class="button-collapse right"><i class="material-icons brownIcon">menu</i></a>
+                    <a href="#menu-mobile" data-activates="menu-mobile" class="button-collapse right"><i class="material-icons">menu</i></a>
                 </div>
             </nav>
         </div>
@@ -34,7 +34,7 @@
   <article class="col s12 m6 l6">
    <div class="card">
     <div class="card-image">   
-        <img src="img/score.png" alt="Pilates" class="materialboxed">
+        <img src="img/score.jpg" alt="Pilates" class="materialboxed">
         <a href="#pilates-modal" class="btn btn-floating halfway-fab brown modal-trigger">
           <i class="material-icons">info</i>
       </a>    								
@@ -76,7 +76,7 @@
 <article class="col s12 m6 l6">
  <div class="card">
     <div class="card-image">
-       <img src="img/dados.png" alt="Nutrição" class="materialboxed">
+       <img src="img/lista.png" alt="Nutrição" class="materialboxed">
        <a href="#nutricao-modal" class="btn btn-floating halfway-fab brown modal-trigger">
           <i class="material-icons">info</i>
       </a>    				
