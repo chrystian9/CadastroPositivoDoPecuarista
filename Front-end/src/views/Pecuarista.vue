@@ -43,7 +43,7 @@
           <div class="card">
             <div class="card-image">
               <img
-                src="img/score.jpg"
+                src="img/score.png"
                 alt="Pilates"
                 class="materialboxed"
               />
@@ -64,24 +64,10 @@
               <div class="row center btn-horario">
                 <a
                   href="/score"
-                  class="btn btn-large blue-logo modal-trigger"
+                  class="btn btn-large blue-logo"
                   ><i class="material-icons left"></i> Gerar Score
                 </a>
               </div>
-            </div>
-            <div class="modal" id="score-modal">
-                <div class="modal-content">
-                    <h5 class="light">Score do Pecuarista: 710</h5>
-                    <img src="img/score2.jpg" alt="Pilates" class="materialboxed">
-                    <p class="light black-text"> Número do Car: 50050505</p>
-                    <p class="light black-text"> Outorga da Água: 12505161</p>
-                    <p class="light black-text"> Descarte de Resíduos Sólidos: 1205189</p>
-                    <p class="light black-text"> Lincenciamento Ambiental: 632515</p>
-                    <h5 class="light green-text">Possui:</h5><p>CAR, Licenciamento Ambienal e Outorga da água<h5 class="light red-text">Não possui:</h5><p>Descarte de Resíduos Sólidos</p>
-                </div>
-                <div class="modal-footer">
-                    <a class="btn blue-logo modal-action modal-close">Sair</a>
-                </div>
             </div>
           </div>
         </article>
@@ -198,7 +184,7 @@
         <article class="col s12 m6 l3">
           <div class="card">
             <div class="card-image">
-              <img src="img/dados.jpg" alt="Funcional" class="materialboxed" />
+              <img src="img/dados.png" alt="Funcional" class="materialboxed" />
               <a class="btn btn-floating halfway-fab blue-logo">
                 <i class="material-icons">info</i>
               </a>
